@@ -1,0 +1,865 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Professional Form</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+/* ===== GLOBAL STYLES ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #080c16;
+  --panel: #111827;
+  --input: #0a101c;
+  --gold: #e7bd68;
+  --gold-light: #f5d995;
+  --text: #f4f5f9;
+  --muted: #929caf;
+  --border: #30394a;
+  --green: #37d99a;
+  --red: #ff6b79;
+}
+
+body {
+  min-height: 100vh;
+  padding: 40px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at top left, #29213c, transparent 42%),
+    radial-gradient(ellipse at bottom right, #182c39, transparent 38%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ===== FORM LAYOUT ===== */
+.form-wrapper {
+  width: 100%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  overflow: hidden;
+  background: #0d1421;
+  border: 1px solid #e7bd6830;
+  border-radius: 25px;
+  box-shadow: 0 30px 90px #0006;
+  animation: appear .65s ease both;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== LEFT SIDE ===== */
+.form-aside {
+  position: relative;
+  overflow: hidden;
+  padding: 42px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    radial-gradient(circle at 20% 20%, #e7bd6824, transparent 40%),
+    linear-gradient(150deg, #202033, #101522 75%);
+  border-right: 1px solid var(--border);
+}
+
+.form-aside::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -110px;
+  bottom: 50px;
+  border: 1px solid #e7bd6825;
+  border-radius: 50%;
+  box-shadow: 0 0 0 25px #e7bd6808,
+              0 0 0 50px #e7bd6805;
+  pointer-events: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: white;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: #171108;
+  background: linear-gradient(135deg, var(--gold-light), #bd8c32);
+  border-radius: 13px;
+}
+
+.brand span span {
+  color: var(--gold);
+}
+
+.aside-content {
+  position: relative;
+  z-index: 1;
+  margin: 60px 0;
+}
+
+.aside-label {
+  display: inline-block;
+  padding: 7px 11px;
+  margin-bottom: 19px;
+  color: var(--gold-light);
+  background: #e7bd6812;
+  border: 1px solid #e7bd6840;
+  border-radius: 30px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.aside-content h1 {
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.2;
+  margin-bottom: 18px;
+  letter-spacing: -1px;
+}
+
+.aside-content h1 span {
+  color: var(--gold);
+}
+
+.aside-content p {
+  color: #a9b3c5;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.benefits {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 17px;
+}
+
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #c6cede;
+  font-size: 12px;
+}
+
+.benefit i {
+  color: var(--gold);
+  width: 18px;
+}
+
+/* ===== FORM PANEL ===== */
+.form-panel {
+  padding: 42px 38px;
+}
+
+.form-heading {
+  margin-bottom: 28px;
+}
+
+.form-heading h2 {
+  font-size: 27px;
+  margin-bottom: 9px;
+}
+
+.form-heading p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.form-heading p a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.form-heading p a:hover {
+  text-decoration: underline;
+}
+
+/* ===== FORM GRID ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 19px 15px;
+}
+
+.form-group {
+  min-width: 0;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 9px;
+  color: #dbe0ea;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.required {
+  color: var(--gold);
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap > i:first-child {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: #8490a6;
+  font-size: 13px;
+  pointer-events: none;
+  transition: color .25s;
+}
+
+.form-control {
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 14px 13px 40px;
+  color: var(--text);
+  background: var(--input);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  outline: none;
+  font-family: inherit;
+  font-size: 12px;
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+
+.form-control::placeholder {
+  color: #6f7b90;
+}
+
+.form-control:focus {
+  background: #0c1421;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px #e7bd6812;
+}
+
+.input-wrap:focus-within > i:first-child {
+  color: var(--gold);
+}
+
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.7;
+  padding-top: 13px;
+}
+
+.textarea-wrap > i:first-child {
+  top: 16px;
+  transform: none;
+}
+
+/* ===== PASSWORD TOGGLE ===== */
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  transform: translateY(-50%);
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.password-toggle:hover {
+  color: var(--gold);
+}
+
+.password-input {
+  padding-right: 42px;
+}
+
+/* ===== PASSWORD STRENGTH ===== */
+.password-strength {
+  display: flex;
+  gap: 5px;
+  margin-top: 9px;
+}
+
+.strength-segment {
+  height: 4px;
+  flex: 1;
+  background: #283143;
+  border-radius: 5px;
+  transition: background .25s;
+}
+
+.strength-text {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* ===== CUSTOM SELECT ===== */
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap::after {
+  content: "\f107";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  color: var(--gold);
+  pointer-events: none;
+}
+
+select.form-control {
+  appearance: none;
+  padding-right: 38px;
+  cursor: pointer;
+}
+
+select.form-control option {
+  color: white;
+  background: #111827;
+}
+
+/* ===== CHECKBOX ===== */
+.terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+  cursor: pointer;
+}
+
+.terms-row input {
+  accent-color: var(--gold);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.terms-row a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.terms-row a:hover {
+  text-decoration: underline;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.submit-button {
+  position: relative;
+  width: 100%;
+  min-height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+  overflow: hidden;
+  color: #171108;
+  background: linear-gradient(115deg, var(--gold-light), #c99a40);
+  border: 0;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.submit-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 45%;
+  height: 200%;
+  background: #ffffff75;
+  transform: rotate(25deg);
+  transition: left .5s;
+}
+
+.submit-button:hover::before {
+  left: 150%;
+}
+
+.submit-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px #e7bd6838;
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.submit-button span,
+.submit-button i {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== VALIDATION AND STATUS ===== */
+.form-message {
+  display: none;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.form-message.success {
+  display: block;
+  color: #8ef0c4;
+  background: #15372c;
+  border: 1px solid #286c53;
+}
+
+.form-message.error {
+  display: block;
+  color: #ffabb4;
+  background: #391e28;
+  border: 1px solid #753445;
+}
+
+.security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 19px;
+  color: #778399;
+  font-size: 10px;
+}
+
+.security-note i {
+  color: var(--green);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 760px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .form-wrapper {
+    max-width: 520px;
+    grid-template-columns: 1fr;
+  }
+
+  .form-aside {
+    padding: 25px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .aside-content {
+    margin: 28px 0;
+  }
+
+  .aside-content h1 {
+    max-width: 420px;
+    font-size: 31px;
+  }
+
+  .benefits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+  }
+
+  .form-panel {
+    padding: 30px 25px;
+  }
+}
+
+@media (max-width: 420px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full {
+    grid-column: auto;
+  }
+
+  .form-aside,
+  .form-panel {
+    padding: 23px 19px;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="form-wrapper">
+
+  <!-- ===== LEFT BRAND PANEL ===== -->
+  <aside class="form-aside">
+
+    <a class="brand" href="#">
+      <span class="brand-icon">
+        <i class="fa-solid fa-gem"></i>
+      </span>
+      <span>Professional <span>Form Design</span></span>
+    </a>
+
+    <div class="aside-content">
+      <div class="aside-label">
+        <i class="fa-solid fa-sparkles"></i> JOIN OUR COMMUNITY
+      </div>
+
+      <h1>Create your<br><span>next chapter.</span></h1>
+
+      <p>
+        Build your profile, explore new opportunities
+        and take the next step in your learning journey
+        with a modern digital experience.
+      </p>
+    </div>
+
+    <div class="benefits">
+      <div class="benefit">
+        <i class="fa-solid fa-shield-halved"></i>
+        Secure experience
+      </div>
+      <div class="benefit">
+        <i class="fa-solid fa-bolt"></i>
+        Quick registration
+      </div>
+      <div class="benefit">
+        <i class="fa-solid fa-graduation-cap"></i>
+        Learning resources
+      </div>
+      <div class="benefit">
+        <i class="fa-solid fa-star"></i>
+        Premium design
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ===== RIGHT FORM PANEL ===== -->
+  <section class="form-panel">
+
+    <header class="form-heading">
+      <h2>Create Account</h2>
+      <p>
+        Fill in your details to get started.
+        Already registered? <a href="#login">Sign in</a>
+      </p>
+    </header>
+
+    <form id="registrationForm">
+
+      <div class="form-grid">
+
+        <!-- Full name -->
+        <div class="form-group">
+          <label class="form-label" for="fullName">
+            Full Name <span class="required">*</span>
+          </label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-user"></i>
+            <input class="form-control" id="fullName"
+                   name="fullName" type="text"
+                   placeholder="Your full name"
+                   autocomplete="name"
+                   minlength="2" maxlength="80" required>
+          </div>
+        </div>
+
+        <!-- Username -->
+        <div class="form-group">
+          <label class="form-label" for="username">Username</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-at"></i>
+            <input class="form-control" id="username"
+                   name="username" type="text"
+                   placeholder="Choose username"
+                   autocomplete="username"
+                   minlength="3" maxlength="24"
+                   pattern="[A-Za-z0-9_]+"
+                   title="Use letters, numbers or underscores">
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group full">
+          <label class="form-label" for="email">
+            Email Address <span class="required">*</span>
+          </label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope"></i>
+            <input class="form-control" id="email"
+                   name="email" type="email"
+                   placeholder="you@example.com"
+                   autocomplete="email" required>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label" for="password">
+            Password <span class="required">*</span>
+          </label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input class="form-control password-input"
+                   id="password" name="password"
+                   type="password" placeholder="Create password"
+                   autocomplete="new-password"
+                   minlength="8" required>
+
+            <button class="password-toggle" type="button"
+                    data-target="password"
+                    aria-label="Show password"
+                    aria-pressed="false">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+
+          <div class="password-strength" aria-hidden="true">
+            <span class="strength-segment"></span>
+            <span class="strength-segment"></span>
+            <span class="strength-segment"></span>
+            <span class="strength-segment"></span>
+          </div>
+          <p class="strength-text" id="strengthText">
+            Use at least 8 characters.
+          </p>
+        </div>
+
+        <!-- Confirm password -->
+        <div class="form-group">
+          <label class="form-label" for="confirmPassword">
+            Confirm Password <span class="required">*</span>
+          </label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-shield-halved"></i>
+            <input class="form-control password-input"
+                   id="confirmPassword" name="confirmPassword"
+                   type="password" placeholder="Repeat password"
+                   autocomplete="new-password" required>
+
+            <button class="password-toggle" type="button"
+                    data-target="confirmPassword"
+                    aria-label="Show confirm password"
+                    aria-pressed="false">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Role dropdown -->
+        <div class="form-group">
+          <label class="form-label" for="role">
+            Account Type <span class="required">*</span>
+          </label>
+          <div class="select-wrap">
+            <select class="form-control" id="role"
+                    name="role" required>
+              <option value="">Select type</option>
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Professional">Professional</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone Number</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-phone"></i>
+            <input class="form-control" id="phone"
+                   name="phone" type="tel"
+                   placeholder="+92 300 1234567"
+                   autocomplete="tel" maxlength="25">
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="form-group full">
+          <label class="form-label" for="message">
+            About You <span style="color:var(--muted)">(Optional)</span>
+          </label>
+          <div class="input-wrap textarea-wrap">
+            <i class="fa-regular fa-message"></i>
+            <textarea class="form-control" id="message"
+                      name="message" maxlength="500"
+                      placeholder="Tell us a little about yourself..."></textarea>
+          </div>
+        </div>
+
+        <!-- Terms -->
+        <div class="form-group full">
+          <label class="terms-row">
+            <input type="checkbox" id="terms" name="terms" required>
+            <span>
+              I agree to the <a href="#terms">Terms of Service</a>
+              and <a href="#privacy">Privacy Policy</a>.
+              <span class="required">*</span>
+            </span>
+          </label>
+        </div>
+
+      </div>
+
+      <button type="submit" class="submit-button">
+        <span>Create My Account</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+      <div class="form-message" id="formMessage"
+           role="status" aria-live="polite"></div>
+
+      <div class="security-note">
+        <i class="fa-solid fa-lock"></i>
+        Your information stays protected
+      </div>
+
+    </form>
+  </section>
+
+</main>
+
+<script>
+/* ===== PASSWORD VISIBILITY ===== */
+document.querySelectorAll(".password-toggle").forEach(button => {
+  button.addEventListener("click", () => {
+    const input = document.getElementById(button.dataset.target);
+    const icon = button.querySelector("i");
+    const show = input.type === "password";
+
+    input.type = show ? "text" : "password";
+    button.setAttribute("aria-pressed", String(show));
+    button.setAttribute(
+      "aria-label",
+      show ? "Hide password" : "Show password"
+    );
+
+    icon.classList.toggle("fa-eye", !show);
+    icon.classList.toggle("fa-eye-slash", show);
+  });
+});
+
+/* ===== PASSWORD STRENGTH INDICATOR ===== */
+const passwordInput = document.getElementById("password");
+const strengthSegments =
+  document.querySelectorAll(".strength-segment");
+const strengthText = document.getElementById("strengthText");
+
+passwordInput.addEventListener("input", () => {
+  const value = passwordInput.value;
+  let score = 0;
+
+  if (value.length >= 8) score++;
+  if (/[a-z]/.test(value) && /[A-Z]/.test(value)) score++;
+  if (/\d/.test(value)) score++;
+  if (/[^A-Za-z0-9]/.test(value)) score++;
+
+  const levels = [
+    { label: "Use at least 8 characters.", color: "#283143" },
+    { label: "Weak password", color: "#ff6b79" },
+    { label: "Fair password", color: "#f0a54a" },
+    { label: "Good password", color: "#e7bd68" },
+    { label: "Strong password", color: "#37d99a" }
+  ];
+
+  strengthSegments.forEach((segment, index) => {
+    segment.style.background =
+      value.length && index < score
+        ? levels[score].color
+        : "#283143";
+  });
+
+  strengthText.textContent =
+    value.length ? levels[score].label : levels[0].label;
+});
+
+/* ===== CONFIRM PASSWORD VALIDATION ===== */
+const confirmPassword =
+  document.getElementById("confirmPassword");
+
+function checkPasswordsMatch() {
+  if (confirmPassword.value &&
+      confirmPassword.value !== passwordInput.value) {
+    confirmPassword.setCustomValidity("Passwords do not match.");
+  } else {
+    confirmPassword.setCustomValidity("");
+  }
+}
+
+passwordInput.addEventListener("input", checkPasswordsMatch);
+confirmPassword.addEventListener("input", checkPasswordsMatch);
+
+/* ===== FORM VALIDATION & DEMO SUBMISSION ===== */
+const form = document.getElementById("registrationForm");
+const formMessage = document.getElementById("formMessage");
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  checkPasswordsMatch();
+
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  /*
+    Front-end demo only.
+    This form does not create a real account or send data
+    to a server. Connect a secure backend to register users.
+  */
+  formMessage.className = "form-message success";
+  formMessage.textContent =
+    "Form validation successful! Demo only — connect a backend to create your account.";
+
+  /* Do not store passwords or sensitive form data in browser storage. */
+});
+</script>
+
+</body>
+</html>
